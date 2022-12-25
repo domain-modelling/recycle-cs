@@ -14,9 +14,10 @@ public class ValidationController : ControllerBase
         this.logger = logger;
     }
 
-    [HttpGet(Name = "Validate")]
-    public ActionResult Get()
+    [HttpGet]
+    public ActionResult Index()
     {
+        logger.Log(LogLevel.Information, "/validate succeeded");
         return new OkResult();
     }
 }
