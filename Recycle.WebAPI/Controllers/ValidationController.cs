@@ -2,9 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Recycle.WebAPI.Controllers;
 
-[ApiController]
 [Route("/validate")]
-public class ValidationController : ControllerBase
+public class ValidationController
 {
     private readonly ILogger<WeatherForecastController> logger;
 
