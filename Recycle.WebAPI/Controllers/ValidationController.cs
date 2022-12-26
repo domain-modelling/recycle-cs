@@ -5,9 +5,9 @@ namespace Recycle.WebAPI.Controllers;
 [Route("/validate")]
 public class ValidationController
 {
-    private readonly ILogger<WeatherForecastController> logger;
+    private readonly ILogger<ValidationController> logger;
 
-    public ValidationController(ILogger<WeatherForecastController> logger)
+    public ValidationController(ILogger<ValidationController> logger)
     {
         this.logger = logger;
     }
