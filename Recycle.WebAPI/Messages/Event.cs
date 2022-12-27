@@ -3,7 +3,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Recycle.WebAPI.Messages;
 
-public class Event
+public abstract class Event
 {
     [JsonPropertyName("type")] 
     public string Type { get; private protected set; }
@@ -13,7 +13,6 @@ public class Event
 
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; } = DateTime.Now;
-
 };
 
 public class Event<TPayload> : Event
@@ -26,7 +25,6 @@ public class Event<TPayload> : Event
         Type = payload.GetType().Name;
         Payload = payload;
     }
-
 
     public override string ToString()
     {

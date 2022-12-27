@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Recycle.WebAPI.Messages;
 
@@ -16,13 +17,10 @@ public partial class HandlingController
     }
 
     [HttpPost]
-    public Event Handle(IList<Event> events, Command command)
+    public Event Handle()
     {
-        logger.Log(LogLevel.Information, "/handle-command succeeded");
-        logger.Log(LogLevel.Information, "events " + events);
-        logger.Log(LogLevel.Information, "command " + command);
-        var response = commandHandler.Handle(events, command);
-        logger.Log(LogLevel.Information, "response " + response);
+        var response = commandHandler.Handle();
+        logger.Log(LogLevel.Information, "/handle-command => " + response);
         return response;
     }
 }

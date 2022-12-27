@@ -15,9 +15,10 @@ public class PriceWasCalculatedTest
     [Test]
     public void NoFractionsDelivered()
     {
-        var priceEvent = commandHandler.Handle(null, null) as Event<PriceWasCalculated>;
+        var priceEvent = commandHandler.Handle() as Event<PriceWasCalculated>;
         
         Assert.That(priceEvent.Type, Is.EqualTo("PriceWasCalculated"));
         Assert.That(priceEvent.Payload, Is.EqualTo(new PriceWasCalculated("Tom", 0, "EUR")));
     }
 }
+

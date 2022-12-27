@@ -2,7 +2,7 @@ namespace Recycle.WebAPI.Messages;
 
 public class CommandHandler
 {
-    public Event Handle(IList<Event> history, Command command)
+    public Event<PriceWasCalculated> Handle()
     {
         return new Event<PriceWasCalculated>(new PriceWasCalculated("Tom", 0, "EUR"));
     }
