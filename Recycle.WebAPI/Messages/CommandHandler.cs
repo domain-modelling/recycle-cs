@@ -4,6 +4,6 @@ public class CommandHandler
 {
     public Event<PriceWasCalculated> Handle()
     {
-        return new Event<PriceWasCalculated>(new PriceWasCalculated("Tom", 0, "EUR"));
+        return new Event<PriceWasCalculated>(new PriceWasCalculated("123", 0, "EUR"));
     }
 }

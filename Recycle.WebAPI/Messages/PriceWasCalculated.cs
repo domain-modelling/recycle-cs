@@ -4,20 +4,20 @@ namespace Recycle.WebAPI.Messages;
 
 public class PriceWasCalculated
 {
-    [JsonPropertyName("person_id")] public string PersonId { get; }
+    [JsonPropertyName("card_id")] public string CardId { get; }
     [JsonPropertyName("price_amount")] public double PriceAmount { get; }
     [JsonPropertyName("price_currency")] public string PriceCurrency { get; }
 
-    public PriceWasCalculated(string personId, double priceAmount, string priceCurrency)
+    public PriceWasCalculated(string cardId, double priceAmount, string priceCurrency)
     {
-        PersonId = personId;
+        CardId = cardId;
         PriceAmount = priceAmount;
         PriceCurrency = priceCurrency;
     }
 
     protected bool Equals(PriceWasCalculated other)
     {
-        return PersonId == other.PersonId
+        return CardId == other.CardId
                && PriceAmount.Equals(other.PriceAmount)
                && PriceCurrency == other.PriceCurrency;
     }
@@ -32,6 +32,6 @@ public class PriceWasCalculated
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(PersonId, PriceAmount, PriceCurrency);
+        return HashCode.Combine(CardId, PriceAmount, PriceCurrency);
     }
 }
