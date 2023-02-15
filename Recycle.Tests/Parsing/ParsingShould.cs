@@ -84,10 +84,13 @@ public class ParsingShould
         
         var parsedMessage = JsonSerializer.Deserialize<HandlingRequest>(message,serializeOptions);
         
-        Assert.That(parsedMessage, Is.Not.Null);
+        Assert.That(parsedMessage.Command, Is.InstanceOf<Event<CalculatePrice>>());
+
+        var command = parsedMessage.Command as Event<CalculatePrice>;
+        Assert.That(command.Payload, Is.EqualTo(new CalculatePrice{CardId = "123"}));
+        
         Assert.Multiple(() =>
         {
-            Assert.That(parsedMessage.Command.GetType(), Is.EqualTo(typeof(Event<CalculatePrice>)));
             Assert.That(parsedMessage.History.Count, Is.EqualTo(6));
         });
     }
