@@ -8,7 +8,7 @@ namespace Recycle.Tests.Parsing;
 public class ParsingShould
 {
     [Test]
-    public void ConvertToAValidRequest()
+    public void DeserializeRequest()
     {
         #region Request
 
@@ -82,13 +82,34 @@ public class ParsingShould
         #endregion
 
         var request = Deserialize<RecycleRequest>(requestJson);
-        
+
         var command = request.Command as Command<CalculatePrice>;
         Assert.That(command.CreatedAt, Is.InstanceOf<DateTime>());
         Assert.That(command.CommandId, Is.EqualTo("TODO"));
         Assert.That(command.Payload, Is.EqualTo(new CalculatePrice { CardId = "123" }));
 
         Assert.That(request.History, Has.Exactly(6).Items);
+    }
+
+    [Test]
+    public void DeserializeCalculatePrice()
+    {
+        var commandJson = @"{
+            ""type"": ""CalculatePrice"",
+            ""command_id"": ""456"",
+            ""created_at"": ""2023-02-15T07:43:43Z"",
+            ""payload"": { ""card_id"": ""123"" }
+        }";
+
+        var deserialized = Deserialize<Command>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Command<CalculatePrice>
+        {
+            CommandId = "456",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
+            Type = "CalculatePrice",
+            Payload = new CalculatePrice { CardId = "123" }
+        }));
     }
 
     private static T Deserialize<T>(string message)
