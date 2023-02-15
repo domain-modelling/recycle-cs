@@ -169,6 +169,34 @@ public class ParsingShould
             }
         }));
     }
+    
+    [Test]
+    public void DeserializeWeightWasMeasured()
+    {
+        var commandJson = @"{
+            ""type"": ""WeightWasMeasured"",
+            ""event_id"": ""741"",
+            ""created_at"": ""2023-02-15T07:43:43.078171Z"",
+            ""payload"": {
+                ""card_id"": ""123"",
+                ""weight"": 487
+            }
+        }";
+
+        var deserialized = Deserialize<Event>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Event<WeightWasMeasured>
+        {
+            Type = "WeightWasMeasured",
+            EventId = "741",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078171Z"),
+            Payload = new WeightWasMeasured
+            {
+                CardId = "123",
+                Weight = 487
+            }
+        }));
+    }
 
     private static T Deserialize<T>(string message)
     {
