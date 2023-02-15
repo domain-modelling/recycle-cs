@@ -18,7 +18,7 @@ public class PriceWasCalculatedTest
         var priceEvent = commandHandler.Handle() as Event<PriceWasCalculated>;
         
         Assert.That(priceEvent.Type, Is.EqualTo("PriceWasCalculated"));
-        Assert.That(priceEvent.Payload, Is.EqualTo(new PriceWasCalculated("Tom", 0, "EUR")));
+        Assert.That(priceEvent.Payload, Is.EqualTo(new PriceWasCalculated("123", 0, "EUR")));
     }
 }
 

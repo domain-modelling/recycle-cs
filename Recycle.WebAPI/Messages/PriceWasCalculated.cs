@@ -34,4 +34,9 @@ public class PriceWasCalculated
     {
         return HashCode.Combine(CardId, PriceAmount, PriceCurrency);
     }
+
+    public override string ToString()
+    {
+        return $"CardId: {CardId}: {PriceAmount}{PriceCurrency}";
+    }
 }
