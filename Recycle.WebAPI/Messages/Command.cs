@@ -5,20 +5,16 @@ namespace Recycle.WebAPI.Messages;
 
 public class Command
 {
-    [JsonPropertyName("type")] 
-    public virtual string Type { get; }
+    [JsonPropertyName("type")] public virtual string Type { get; set; }
 
-    [JsonPropertyName("command_id")]
-    public string CommandId { get; } = Guid.NewGuid().ToString();
+    [JsonPropertyName("command_id")] public string CommandId { get; set; }
 
-    [JsonPropertyName("created_at")]
-    public DateTime CreatedAt { get; } = DateTime.Now;
+    [JsonPropertyName("created_at")] public DateTime CreatedAt { get; set; }
 };
 
 public class Command<TPayload> : Command
 {
-    [JsonPropertyName("payload")] 
-    public TPayload Payload { get;  }
+    [JsonPropertyName("payload")] public TPayload Payload { get; set; }
 
     public override string Type => Payload.GetType().Name;
 

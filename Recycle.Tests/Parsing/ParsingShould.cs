@@ -10,9 +10,9 @@ public class ParsingShould
     [Test]
     public void ConvertToAValidRequest()
     {
-        #region Command
+        #region Request
 
-        var message = @"{
+        var requestJson = @"{
         ""command"": {      
             ""command_id"": ""TODO"",
             ""created_at"": ""2023-02-15T07:43:43.078177Z"",
@@ -81,13 +81,18 @@ public class ParsingShould
 
         #endregion
 
-        JsonSerializerOptions options = JsonSerializationConfiguration.Default;
-
-        var parsedMessage = JsonSerializer.Deserialize<HandlingRequest>(message, options);
-
-        var command = parsedMessage.Command as Event<CalculatePrice>;
+        var request = Deserialize(requestJson);
+        
+        var command = request.Command as Command<CalculatePrice>;
+        Assert.That(command.CreatedAt, Is.InstanceOf<DateTime>());
+        Assert.That(command.CommandId, Is.EqualTo("TODO"));
         Assert.That(command.Payload, Is.EqualTo(new CalculatePrice { CardId = "123" }));
 
-        Assert.That(parsedMessage.History.Count, Is.EqualTo(6));
+        Assert.That(request.History.Count, Is.EqualTo(6));
+    }
+
+    private static HandlingRequest Deserialize(string message)
+    {
+        return JsonSerializer.Deserialize<HandlingRequest>(message, JsonSerializationConfiguration.Default)!;
     }
 }

@@ -4,9 +4,9 @@ using Recycle.WebAPI.Messages;
 
 namespace Recycle.WebAPI.Middleware;
 
-public class EventConverter : JsonConverter<Event>
+public class CommandConverter : JsonConverter<Command>
 {
-    public override Event? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Command? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var readerClone = reader;
 
@@ -21,11 +21,12 @@ public class EventConverter : JsonConverter<Event>
 
         return type switch
         {
-            _ => JsonSerializer.Deserialize<Event>(ref reader)
+            "CalculatePrice" => JsonSerializer.Deserialize<Command<CalculatePrice>>(ref reader),
+            _ => JsonSerializer.Deserialize<Command>(ref reader)
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Event value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Command value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value, value.GetType(), options);
     }
