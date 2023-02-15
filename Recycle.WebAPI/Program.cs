@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.HttpLogging;
 using Recycle.WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new EventConverter());
-    });
+    .AddJsonOptions(options => JsonSerializationConfiguration.Initialize(options));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -8,9 +8,10 @@ namespace Recycle.Tests.Parsing;
 public class ParsingShould
 {
     [Test]
-    public void ConvertToAValidCommand()
+    public void ConvertToAValidRequest()
     {
         #region Command
+
         var message = @"{
         ""command"": {      
             ""command_id"": ""TODO"",
@@ -77,21 +78,16 @@ public class ParsingShould
         }
         ]
     }";
+
         #endregion
 
-        var serializeOptions = new JsonSerializerOptions();
-        serializeOptions.Converters.Add(new EventConverter());
-        
-        var parsedMessage = JsonSerializer.Deserialize<HandlingRequest>(message,serializeOptions);
-        
-        Assert.That(parsedMessage.Command, Is.InstanceOf<Event<CalculatePrice>>());
+        JsonSerializerOptions options = JsonSerializationConfiguration.Default;
+
+        var parsedMessage = JsonSerializer.Deserialize<HandlingRequest>(message, options);
 
         var command = parsedMessage.Command as Event<CalculatePrice>;
-        Assert.That(command.Payload, Is.EqualTo(new CalculatePrice{CardId = "123"}));
-        
-        Assert.Multiple(() =>
-        {
-            Assert.That(parsedMessage.History.Count, Is.EqualTo(6));
-        });
+        Assert.That(command.Payload, Is.EqualTo(new CalculatePrice { CardId = "123" }));
+
+        Assert.That(parsedMessage.History.Count, Is.EqualTo(6));
     }
 }
