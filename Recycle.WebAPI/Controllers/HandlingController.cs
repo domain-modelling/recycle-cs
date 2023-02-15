@@ -16,7 +16,7 @@ public partial class HandlingController
     }
 
     [HttpPost]
-    public Event Handle()
+    public Event Handle([FromBody] HandlingRequest request)
     {
         var response = commandHandler.Handle();
         logger.Log(LogLevel.Information, "/handle-command => " + response);

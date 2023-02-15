@@ -3,10 +3,10 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Recycle.WebAPI.Messages;
 
-public abstract class Event
+public class Event
 {
     [JsonPropertyName("type")] 
-    public string Type { get; private protected set; }
+    public virtual string Type { get; }
 
     [JsonPropertyName("event_id")]
     public string EventId { get; } = Guid.NewGuid().ToString();
@@ -18,11 +18,12 @@ public abstract class Event
 public class Event<TPayload> : Event
 {
     [JsonPropertyName("payload")] 
-    public TPayload Payload { get; }
-    
+    public TPayload Payload { get;  }
+
+    public override string Type => Payload.GetType().Name;
+
     public Event(TPayload payload)
     {
-        Type = payload.GetType().Name;
         Payload = payload;
     }
 
