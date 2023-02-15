@@ -25,6 +25,7 @@ public class EventConverter : JsonConverter<Event>
             "IdCardScannedAtEntranceGate" => JsonSerializer.Deserialize<Event<IdCardScannedAtEntranceGate>>(ref reader),
             "WeightWasMeasured" => JsonSerializer.Deserialize<Event<WeightWasMeasured>>(ref reader),
             "FractionWasSelected" => JsonSerializer.Deserialize<Event<FractionWasSelected>>(ref reader),
+            "IdCardScannedAtExitGate" => JsonSerializer.Deserialize<Event<IdCardScannedAtExitGate>>(ref reader),
             _ => JsonSerializer.Deserialize<Event>(ref reader)
         };
     }
