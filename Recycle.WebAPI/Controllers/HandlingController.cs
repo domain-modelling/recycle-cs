@@ -18,7 +18,13 @@ public class HandlingController
     public Event Handle([FromBody] RecycleRequest request)
     {
         logger.Log(LogLevel.Information, "/handle-command request => " + JsonSerializer.Serialize(request));
-        var response = new Event<PriceWasCalculated>(new PriceWasCalculated("123", 0, "EUR"));
+        var response = new Event<PriceWasCalculated>
+        {
+            EventId = Guid.NewGuid().ToString(),
+            CreatedAt = DateTime.Now,
+            Payload = new PriceWasCalculated { CardId = "123", PriceAmount = 0, PriceCurrency = "EUR" }
+        };
+
         logger.Log(LogLevel.Information, "/handle-command response => " + JsonSerializer.Serialize(response));
         return response;
     }

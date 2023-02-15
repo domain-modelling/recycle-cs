@@ -112,6 +112,38 @@ public class ParsingShould
         }));
     }
 
+    [Test]
+    public void DeserializeIdCardRegistered()
+    {
+        var commandJson = @"{
+            ""type"": ""IdCardRegistered"",
+            ""created_at"": ""2023-02-15T07:43:43.078156Z"",
+            ""event_id"": ""789"",
+            ""payload"": {
+                ""address"": ""1428 Elm Street"",
+                ""card_id"": ""123"",
+                ""city"": ""Moon Village"",
+                ""person_id"": ""Freddy""
+            }
+        }";
+
+        var deserialized = Deserialize<Event>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Event<IdCardRegistered>
+        {
+            EventId = "789",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078156Z"),
+            Type = "IdCardRegistered",
+            Payload = new IdCardRegistered
+            {
+                CardId = "123",
+                Address = "1428 Elm Street",
+                City = "Moon Village",
+                PersonId = "Freddy"
+            }
+        }));
+    }
+
     private static T Deserialize<T>(string message)
     {
         return JsonSerializer.Deserialize<T>(message, JsonSerializationConfiguration.Default)!;

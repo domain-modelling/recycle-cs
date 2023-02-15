@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Recycle.WebAPI.Messages;
 
-public class Event
+public record Event
 {
     [JsonPropertyName("type")] public virtual string Type { get; set; }
 
@@ -11,13 +11,9 @@ public class Event
     [JsonPropertyName("created_at")] public DateTime CreatedAt { get; set; }
 };
 
-public class Event<TPayload> : Event
+public record Event<TPayload> : Event
 {
     [JsonPropertyName("payload")] public TPayload Payload { get; set; }
 
-    public Event(TPayload payload)
-    {
-        Payload = payload;
-        Type = payload.GetType().Name;
-    }
+    public override string Type => Payload.GetType().Name;
 }

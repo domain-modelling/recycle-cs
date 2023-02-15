@@ -21,6 +21,7 @@ public class EventConverter : JsonConverter<Event>
 
         return type switch
         {
+            "IdCardRegistered" => JsonSerializer.Deserialize<Event<IdCardRegistered>>(ref reader),
             _ => JsonSerializer.Deserialize<Event>(ref reader)
         };
     }
