@@ -144,6 +144,32 @@ public class ParsingShould
         }));
     }
 
+    [Test]
+    public void DeserializeIdCardScannedAtEntranceGate()
+    {
+        var commandJson = @"{
+            ""type"": ""IdCardScannedAtEntranceGate"",
+            ""event_id"": ""789"",
+            ""created_at"": ""2023-02-15T07:43:43Z"",
+            ""payload"": {
+                ""card_id"": ""123""
+            }
+        }";
+
+        var deserialized = Deserialize<Event>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Event<IdCardScannedAtEntranceGate>
+        {
+            Type = "IdCardScannedAtEntranceGate",
+            EventId = "789",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
+            Payload = new IdCardScannedAtEntranceGate
+            {
+                CardId = "123",
+            }
+        }));
+    }
+
     private static T Deserialize<T>(string message)
     {
         return JsonSerializer.Deserialize<T>(message, JsonSerializationConfiguration.Default)!;
