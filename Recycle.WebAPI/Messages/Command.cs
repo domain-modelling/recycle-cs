@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Recycle.WebAPI.Messages;
 
@@ -21,10 +20,5 @@ public class Command<TPayload> : Command
     public Command(TPayload payload)
     {
         Payload = payload;
-    }
-
-    public override string ToString()
-    {
-        return JsonSerializer.Serialize(this);
     }
 }

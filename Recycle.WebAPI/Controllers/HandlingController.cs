@@ -5,7 +5,7 @@ using Recycle.WebAPI.Messages;
 namespace Recycle.WebAPI.Controllers;
 
 [Route("/handle-command")]
-public partial class HandlingController
+public class HandlingController
 {
     private readonly ILogger<HandlingController> logger;
 
@@ -15,7 +15,7 @@ public partial class HandlingController
     }
 
     [HttpPost]
-    public Event Handle([FromBody] HandlingRequest request)
+    public Event Handle([FromBody] RecycleRequest request)
     {
         logger.Log(LogLevel.Information, "/handle-command request => " + JsonSerializer.Serialize(request));
         var response = new Event<PriceWasCalculated>(new PriceWasCalculated("123", 0, "EUR"));

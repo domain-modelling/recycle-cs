@@ -3,7 +3,7 @@ using Recycle.WebAPI.Messages;
 
 namespace Recycle.WebAPI.Controllers;
 
-public class HandlingRequest
+public class RecycleRequest
 {
     [JsonPropertyName("command")]
     public Command Command { get; set; }

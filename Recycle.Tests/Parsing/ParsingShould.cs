@@ -81,18 +81,18 @@ public class ParsingShould
 
         #endregion
 
-        var request = Deserialize(requestJson);
+        var request = Deserialize<RecycleRequest>(requestJson);
         
         var command = request.Command as Command<CalculatePrice>;
         Assert.That(command.CreatedAt, Is.InstanceOf<DateTime>());
         Assert.That(command.CommandId, Is.EqualTo("TODO"));
         Assert.That(command.Payload, Is.EqualTo(new CalculatePrice { CardId = "123" }));
 
-        Assert.That(request.History.Count, Is.EqualTo(6));
+        Assert.That(request.History, Has.Exactly(6).Items);
     }
 
-    private static HandlingRequest Deserialize(string message)
+    private static T Deserialize<T>(string message)
     {
-        return JsonSerializer.Deserialize<HandlingRequest>(message, JsonSerializationConfiguration.Default)!;
+        return JsonSerializer.Deserialize<T>(message, JsonSerializationConfiguration.Default)!;
     }
 }
