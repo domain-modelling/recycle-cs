@@ -13,7 +13,16 @@ public record Event
 
 public record Event<TPayload> : Event
 {
-    [JsonPropertyName("payload")] public TPayload Payload { get; set; }
+    private TPayload payload;
 
-    public override string Type => Payload.GetType().Name;
+    [JsonPropertyName("payload")]
+    public TPayload Payload
+    {
+        get => payload;
+        set
+        {
+            payload = value;
+            Type = value.GetType().Name;
+        }
+    }
 }
