@@ -197,6 +197,34 @@ public class ParsingShould
             }
         }));
     }
+    
+    [Test]
+    public void DeserializeFractionWasSelected()
+    {
+        var commandJson = @"{
+            ""type"": ""FractionWasSelected"",
+            ""event_id"": ""852"",
+            ""created_at"": ""2023-02-15T07:43:43.078172Z"",
+            ""payload"": {
+                ""card_id"": ""123"",
+                ""fraction_type"": ""Construction waste""
+            }
+        }";
+
+        var deserialized = Deserialize<Event>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Event<FractionWasSelected>
+        {
+            Type = "FractionWasSelected",
+            EventId = "852",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
+            Payload = new FractionWasSelected
+            {
+                CardId = "123",
+                FractionType = "Construction waste"
+            }
+        }));
+    }
 
     private static T Deserialize<T>(string message)
     {
