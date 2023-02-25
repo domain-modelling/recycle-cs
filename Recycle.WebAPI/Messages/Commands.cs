@@ -26,3 +26,8 @@ public record Command<TPayload> : Command
         }
     }
 }
+
+public record CalculatePrice
+{
+    [JsonPropertyName("card_id")] public string CardId { get; set; }
+}
