@@ -225,6 +225,36 @@ public class ParsingShould
             }
         }));
     }
+
+    [Test]
+    public void DeserializeFractionWasDropped()
+    {
+        var commandJson = @"{
+            ""type"": ""FractionWasDropped"",
+            ""event_id"": ""852"",
+            ""created_at"": ""2023-02-15T07:43:43.078172Z"",
+            ""payload"": {
+                ""card_id"": ""123"",
+                ""fraction_type"": ""Construction waste"",
+                ""weight"": 234
+            }
+        }";
+
+        var deserialized = Deserialize<Event>(commandJson);
+
+        Assert.That(deserialized, Is.EqualTo(new Event<FractionWasDropped>
+        {
+            Type = "FractionWasSelected",
+            EventId = "852",
+            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
+            Payload = new FractionWasDropped()
+            {
+                CardId = "123",
+                FractionType = "Construction waste",
+                Weight = 234
+            }
+        }));
+    }
     
     [Test]
     public void DeserializeIdCardScannedAtExitGate()
