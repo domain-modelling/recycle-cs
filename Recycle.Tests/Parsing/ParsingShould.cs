@@ -133,7 +133,6 @@ public class ParsingShould
         {
             EventId = "789",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078156Z"),
-            Type = "IdCardRegistered",
             Payload = new IdCardRegistered
             {
                 CardId = "123",
@@ -160,7 +159,6 @@ public class ParsingShould
 
         Assert.That(deserialized, Is.EqualTo(new Event<IdCardScannedAtEntranceGate>
         {
-            Type = "IdCardScannedAtEntranceGate",
             EventId = "789",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
             Payload = new IdCardScannedAtEntranceGate
@@ -187,7 +185,6 @@ public class ParsingShould
 
         Assert.That(deserialized, Is.EqualTo(new Event<WeightWasMeasured>
         {
-            Type = "WeightWasMeasured",
             EventId = "741",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078171Z"),
             Payload = new WeightWasMeasured
@@ -215,7 +212,6 @@ public class ParsingShould
 
         Assert.That(deserialized, Is.EqualTo(new Event<FractionWasSelected>
         {
-            Type = "FractionWasSelected",
             EventId = "852",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
             Payload = new FractionWasSelected
@@ -244,7 +240,6 @@ public class ParsingShould
 
         Assert.That(deserialized, Is.EqualTo(new Event<FractionWasDropped>
         {
-            Type = "FractionWasSelected",
             EventId = "852",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
             Payload = new FractionWasDropped()
@@ -272,7 +267,6 @@ public class ParsingShould
 
         Assert.That(deserialized, Is.EqualTo(new Event<IdCardScannedAtExitGate>
         {
-            Type = "IdCardScannedAtExitGate",
             EventId = "963",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078175Z"),
             Payload = new IdCardScannedAtExitGate
