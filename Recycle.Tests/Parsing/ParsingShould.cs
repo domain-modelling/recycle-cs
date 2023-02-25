@@ -107,7 +107,6 @@ public class ParsingShould
         {
             CommandId = "456",
             CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
-            Type = "CalculatePrice",
             Payload = new CalculatePrice { CardId = "123" }
         }));
     }
