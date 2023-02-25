@@ -10,17 +10,7 @@ public record Command
 
 public record Command<TPayload> : Command
 {
-    private TPayload payload;
-
-    [JsonPropertyName("payload")]
-    public TPayload Payload
-    {
-        get => payload;
-        set
-        {
-            payload = value;
-        }
-    }
+    [JsonPropertyName("payload")] public TPayload Payload { get; set; }
 }
 
 public record CalculatePrice
