@@ -34,6 +34,24 @@ public class EventConverter : JsonConverter<Event>
 
     public override void Write(Utf8JsonWriter writer, Event value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        switch (value)
+        {
+            case Event<PriceWasCalculated> priceWasCalculated:
+                writer.WriteStartObject();
+
+                writer.WriteString("type", "PriceWasCalculated");
+                writer.WriteString("event_id", priceWasCalculated.EventId);
+                writer.WriteString("created_at", priceWasCalculated.CreatedAt);
+
+                writer.WritePropertyName("payload");
+                writer.WriteRawValue(JsonSerializer.Serialize(priceWasCalculated.Payload, options));
+
+                writer.WriteEndObject();
+
+                break;
+            default:
+                JsonSerializer.Serialize(writer, value, value.GetType(), options);
+                break;
+        }
     }
 }
