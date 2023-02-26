@@ -1,7 +1,5 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Recycle.WebAPI.Messages;
-using Recycle.WebAPI.Middleware;
 
 namespace Recycle.WebAPI.Controllers;
 
@@ -16,13 +14,14 @@ public class HandlingController
     }
 
     [HttpPost]
-    public Event Handle([FromBody] RecycleRequest request)
+    public IActionResult Handle([FromBody] RecycleRequest request)
     {
-        return new Event<PriceWasCalculated>
+        Event response = new Event<PriceWasCalculated>
         {
             EventId = Guid.NewGuid().ToString(),
             CreatedAt = DateTime.Now,
             Payload = new PriceWasCalculated { CardId = "123", PriceAmount = 0, PriceCurrency = "EUR" }
         };
+        return new OkObjectResult(response);
     }
 }

@@ -15,7 +15,7 @@ public class ParsingShouldDeserialize
         var json = @"{
         ""command"": {      
             ""command_id"": ""TODO"",
-            ""created_at"": ""2023-02-15T07:43:43.078177Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078177+01:00"",
             ""payload"": {
                 ""card_id"": ""123""
             },
@@ -23,7 +23,7 @@ public class ParsingShouldDeserialize
         },
         ""history"": [
         {
-            ""created_at"": ""2023-02-15T07:43:43.078156Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078156+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""address"": ""1428 Elm Street"",
@@ -34,7 +34,7 @@ public class ParsingShouldDeserialize
             ""type"": ""IdCardRegistered""
         },
         {
-            ""created_at"": ""2023-02-15T07:43:43.078169Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078169+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""card_id"": ""123""
@@ -42,7 +42,7 @@ public class ParsingShouldDeserialize
             ""type"": ""IdCardScannedAtEntranceGate""
         },
         {
-            ""created_at"": ""2023-02-15T07:43:43.078171Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078171+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""card_id"": ""123"",
@@ -51,7 +51,7 @@ public class ParsingShouldDeserialize
             ""type"": ""WeightWasMeasured""
         },
         {
-            ""created_at"": ""2023-02-15T07:43:43.078172Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078172+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""card_id"": ""123"",
@@ -60,7 +60,7 @@ public class ParsingShouldDeserialize
             ""type"": ""FractionWasSelected""
         },
         {
-            ""created_at"": ""2023-02-15T07:43:43.078174Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078174+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""card_id"": ""123"",
@@ -69,7 +69,7 @@ public class ParsingShouldDeserialize
             ""type"": ""WeightWasMeasured""
         },
         {
-            ""created_at"": ""2023-02-15T07:43:43.078175Z"",
+            ""created_at"": ""2023-02-15T07:43:43.078175+01:00"",
             ""event_id"": ""todo"",
             ""payload"": {
                 ""card_id"": ""123""
@@ -97,14 +97,14 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""CalculatePrice"",
             ""command_id"": ""456"",
-            ""created_at"": ""2023-02-15T07:43:43Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": { ""card_id"": ""123"" }
         }";
 
         Assert.That(Deserialize<Command>(json), Is.EqualTo(new Command<CalculatePrice>
         {
             CommandId = "456",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new CalculatePrice { CardId = "123" }
         }));
     }
@@ -114,7 +114,7 @@ public class ParsingShouldDeserialize
     {
         var json = @"{
             ""type"": ""IdCardRegistered"",
-            ""created_at"": ""2023-02-15T07:43:43.078156Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""event_id"": ""789"",
             ""payload"": {
                 ""address"": ""1428 Elm Street"",
@@ -127,7 +127,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<IdCardRegistered>
         {
             EventId = "789",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078156Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new IdCardRegistered
             {
                 CardId = "123",
@@ -144,7 +144,7 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""IdCardScannedAtEntranceGate"",
             ""event_id"": ""789"",
-            ""created_at"": ""2023-02-15T07:43:43Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
                 ""card_id"": ""123""
             }
@@ -153,7 +153,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<IdCardScannedAtEntranceGate>
         {
             EventId = "789",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new IdCardScannedAtEntranceGate
             {
                 CardId = "123",
@@ -167,7 +167,7 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""WeightWasMeasured"",
             ""event_id"": ""741"",
-            ""created_at"": ""2023-02-15T07:43:43.078171Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
                 ""card_id"": ""123"",
                 ""weight"": 487
@@ -177,7 +177,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<WeightWasMeasured>
         {
             EventId = "741",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078171Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new WeightWasMeasured
             {
                 CardId = "123",
@@ -192,7 +192,7 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""FractionWasSelected"",
             ""event_id"": ""852"",
-            ""created_at"": ""2023-02-15T07:43:43.078172Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
                 ""card_id"": ""123"",
                 ""fraction_type"": ""Construction waste""
@@ -202,7 +202,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<FractionWasSelected>
         {
             EventId = "852",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new FractionWasSelected
             {
                 CardId = "123",
@@ -217,7 +217,7 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""FractionWasDropped"",
             ""event_id"": ""852"",
-            ""created_at"": ""2023-02-15T07:43:43.078172Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
                 ""card_id"": ""123"",
                 ""fraction_type"": ""Construction waste"",
@@ -228,7 +228,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<FractionWasDropped>
         {
             EventId = "852",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078172Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new FractionWasDropped()
             {
                 CardId = "123",
@@ -244,7 +244,7 @@ public class ParsingShouldDeserialize
         var json = @"{
             ""type"": ""IdCardScannedAtExitGate"",
             ""event_id"": ""963"",
-            ""created_at"": ""2023-02-15T07:43:43.078175Z"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
                 ""card_id"": ""123""
             }
@@ -253,7 +253,7 @@ public class ParsingShouldDeserialize
         Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<IdCardScannedAtExitGate>
         {
             EventId = "963",
-            CreatedAt = DateTime.Parse("2023-02-15T06:43:43.078175Z"),
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
             Payload = new IdCardScannedAtExitGate
             {
                 CardId = "123"
@@ -299,7 +299,7 @@ public class ParsingShouldSerialize
     [Test]
     public void PriceWasCalculated()
     {
-        var @event = new Event<PriceWasCalculated>
+        Event @event = new Event<PriceWasCalculated>
         {
             EventId = "963",
             CreatedAt = DateTime.Parse("2023-02-15T10:30:00+01:00"),
