@@ -1,7 +1,9 @@
 using System.Text.Json.Serialization;
+using Recycle.WebAPI.Middleware;
 
 namespace Recycle.WebAPI.Messages;
 
+[JsonConverter(typeof(EventConverter))]
 public record Event
 {
     [JsonPropertyName("event_id")] public string EventId { get; set; }

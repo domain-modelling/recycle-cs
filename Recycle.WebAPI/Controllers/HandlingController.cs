@@ -1,20 +1,16 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Recycle.WebAPI.Messages;
+using Recycle.WebAPI.Middleware;
 
 namespace Recycle.WebAPI.Controllers;
 
+[ApiController]
 [Route("/handle-command")]
 public class HandlingController
 {
-    private readonly ILogger<HandlingController> logger;
-
-    public HandlingController(ILogger<HandlingController> logger)
-    {
-        this.logger = logger;
-    }
-
     [HttpPost]
-    public IActionResult Handle([FromBody] RecycleRequest request)
+    public string Handle([FromBody] RecycleRequest request)
     {
         Event response = new Event<PriceWasCalculated>
         {
@@ -22,6 +18,6 @@ public class HandlingController
             CreatedAt = DateTime.Now,
             Payload = new PriceWasCalculated { CardId = "123", PriceAmount = 0, PriceCurrency = "EUR" }
         };
-        return new OkObjectResult(response);
+        return JsonSerializer.Serialize(response, JsonSerializationConfiguration.Default);
     }
 }

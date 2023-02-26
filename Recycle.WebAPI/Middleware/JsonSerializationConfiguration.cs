@@ -15,7 +15,7 @@ public static class JsonSerializationConfiguration
 
     private static JsonSerializerOptions InitializeSerializer(JsonSerializerOptions options)
     {
-        options.Converters.Add(new EventConverter());
+        // options.Converters.Add(new EventConverter());
         options.Converters.Add(new CommandConverter());
         options.WriteIndented = true;
         
