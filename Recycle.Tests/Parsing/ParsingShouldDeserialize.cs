@@ -322,10 +322,10 @@ public class ParsingShouldSerialize
 }
 }";
 
-        Assert.That(Deserialize<Event>(@event), Is.EqualTo(json));
+        Assert.That(Serialize<Event>(@event), Is.EqualTo(json));
     }
 
-    private string Deserialize<T>(Event @event)
+    private string Serialize<T>(Event @event)
     {
         return JsonSerializer.Serialize(@event, JsonSerializationConfiguration.Default);
     }
