@@ -17,6 +17,8 @@ public static class JsonSerializationConfiguration
     {
         options.Converters.Add(new EventConverter());
         options.Converters.Add(new CommandConverter());
+        options.WriteIndented = true;
+        
         return options;
     }
 }

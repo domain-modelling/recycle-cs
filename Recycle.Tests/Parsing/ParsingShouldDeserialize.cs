@@ -310,16 +310,17 @@ public class ParsingShouldSerialize
                 PriceCurrency = "EUR"
             }
         };
-        var json = "{"
-                   + @"""type"":""PriceWasCalculated"","
-                   + @"""event_id"":""963"","
-                   + @"""created_at"":""2023-02-15T10:30:00+01:00"","
-                   + @"""payload"":{"
-                   + @"""card_id"":""123"","
-                   + @"""price_amount"":10,"
-                   + @"""price_currency"":""EUR"""
-                   + @"}"
-                   + @"}";
+        var json = 
+@"{
+  ""type"": ""PriceWasCalculated"",
+  ""event_id"": ""963"",
+  ""created_at"": ""2023-02-15T10:30:00+01:00"",
+  ""payload"": {
+  ""card_id"": ""123"",
+  ""price_amount"": 10,
+  ""price_currency"": ""EUR""
+}
+}";
 
         Assert.That(Deserialize<Event>(@event), Is.EqualTo(json));
     }

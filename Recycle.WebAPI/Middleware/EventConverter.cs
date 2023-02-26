@@ -34,24 +34,33 @@ public class EventConverter : JsonConverter<Event>
 
     public override void Write(Utf8JsonWriter writer, Event value, JsonSerializerOptions options)
     {
-        switch (value)
+        if (value.GetType().IsGenericType)
         {
-            case Event<PriceWasCalculated> priceWasCalculated:
-                writer.WriteStartObject();
+            writer.WriteStartObject();
 
-                writer.WriteString("type", "PriceWasCalculated");
-                writer.WriteString("event_id", priceWasCalculated.EventId);
-                writer.WriteString("created_at", priceWasCalculated.CreatedAt);
+            writer.WriteString("type", GetEventType(value));
+            writer.WriteString("event_id", value.EventId);
+            writer.WriteString("created_at", value.CreatedAt);
 
-                writer.WritePropertyName("payload");
-                writer.WriteRawValue(JsonSerializer.Serialize(priceWasCalculated.Payload, options));
 
-                writer.WriteEndObject();
+            writer.WritePropertyName("payload");
+            writer.WriteRawValue(JsonSerializer.Serialize(GetPayload(value), options));
 
-                break;
-            default:
-                JsonSerializer.Serialize(writer, value, value.GetType(), options);
-                break;
+            writer.WriteEndObject();
         }
+        else
+        {
+            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+        }
+    }
+
+    private static object? GetPayload(Event value)
+    {
+        return value.GetType().GetProperty("Payload")?.GetValue(value);
+    }
+
+    private static string GetEventType(Event value)
+    {
+        return value.GetType().GenericTypeArguments[0].Name;
     }
 }
