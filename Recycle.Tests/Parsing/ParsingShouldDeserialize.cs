@@ -137,6 +137,66 @@ public class ParsingShouldDeserialize
             }
         }));
     }
+    
+    [Test]
+    public void ExemptionWasGranted()
+    {
+        var json = @"{
+            ""type"": ""ExemptionWasGranted"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
+            ""event_id"": ""789"",
+            ""payload"": {
+                ""card_id"": ""123"",
+                ""fraction_type"": ""Green waste"",
+                ""weight"": 50,
+                ""expiry_date"": ""2023-01-01""
+            }
+        }";
+
+        Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<ExemptionWasGranted>
+        {
+            EventId = "789",
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
+            Payload = new ExemptionWasGranted
+            {
+                CardId = "123",
+                FractionType = "Green waste",
+                Weight = 50,
+                ExpiryDate = DateTime.Parse("2023-01-01"),
+            }
+        }));
+    }
+
+    [Test]
+    public void DiscountWasBought()
+    {
+        var json = @"{
+            ""type"": ""DiscountWasBought"",
+            ""created_at"": ""2023-02-15T08:15:00+01:00"",
+            ""event_id"": ""789"",
+            ""payload"": {
+                ""card_id"": ""123"",
+                ""discount_percentage"": 0.25,
+                ""fraction_type"": ""Green waste"",
+                ""weight"": 50,
+                ""expiry_date"": ""2023-01-01""
+            }
+        }";
+
+        Assert.That(Deserialize<Event>(json), Is.EqualTo(new Event<DiscountWasBought>
+        {
+            EventId = "789",
+            CreatedAt = DateTime.Parse("2023-02-15T08:15:00+01:00"),
+            Payload = new DiscountWasBought
+            {
+                CardId = "123",
+                DiscountPercentage = 0.25,
+                FractionType = "Green waste",
+                Weight = 50,
+                ExpiryDate = DateTime.Parse("2023-01-01"),
+            }
+        }));
+    }
 
     [Test]
     public void IdCardScannedAtEntranceGate()
@@ -146,7 +206,8 @@ public class ParsingShouldDeserialize
             ""event_id"": ""789"",
             ""created_at"": ""2023-02-15T08:15:00+01:00"",
             ""payload"": {
-                ""card_id"": ""123""
+                ""card_id"": ""123"",
+                ""date"": ""2023-01-01""
             }
         }";
 
@@ -157,6 +218,7 @@ public class ParsingShouldDeserialize
             Payload = new IdCardScannedAtEntranceGate
             {
                 CardId = "123",
+                Date = DateTime.Parse("2023-01-01")
             }
         }));
     }

@@ -24,6 +24,24 @@ public record IdCardRegistered
 public record IdCardScannedAtEntranceGate
 {
     [JsonPropertyName("card_id")] public string CardId { get; set; }
+    [JsonPropertyName("date")] public DateTime Date { get; set; }
+}
+
+public record ExemptionWasGranted
+{
+    [JsonPropertyName("card_id")] public string CardId { get; set; }
+    [JsonPropertyName("fraction_type")] public string FractionType { get; set; }
+    [JsonPropertyName("weight")] public int Weight { get; set; }
+    [JsonPropertyName("expiry_date")] public DateTime ExpiryDate { get; set; }
+}
+
+public record DiscountWasBought
+{
+    [JsonPropertyName("card_id")] public string CardId { get; set; }
+    [JsonPropertyName("discount_percentage")] public double DiscountPercentage { get; set; }
+    [JsonPropertyName("fraction_type")] public string FractionType { get; set; }
+    [JsonPropertyName("weight")] public int Weight { get; set; }
+    [JsonPropertyName("expiry_date")] public DateTime ExpiryDate { get; set; }
 }
 
 public record FractionWasSelected
