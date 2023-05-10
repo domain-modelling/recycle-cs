@@ -16,7 +16,7 @@ public class HandlingController
         {
             EventId = Guid.NewGuid().ToString(),
             CreatedAt = DateTime.Now,
-            Payload = new PriceWasCalculated { CardId = "321", PriceAmount = 0, PriceCurrency = "EUR" }
+            Payload = new PriceWasCalculated { CardId = "123", PriceAmount = 1, PriceCurrency = "EUR" }
         };
         return JsonSerializer.Serialize(response, JsonSerializationConfiguration.Default);
     }
