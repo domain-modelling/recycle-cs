@@ -15,7 +15,7 @@ Make sure you have ngrok configured correctly. If unsure, please visit https://d
 You can also visit https://dashboard.ngrok.com/cloud-edge/endpoints to see the endpoints you are exposing.
 
 ## Registering on the hands-on server
-Go to https://domain-modelling.fly.dev/ and start a session.
+Go to https://domainmodelling.dev and start a session.
 
 Add the url you got from ngrok as a client url when asked, and validate the connection.
 
