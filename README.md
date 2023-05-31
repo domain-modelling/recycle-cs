@@ -1,7 +1,6 @@
 # recycle-cs
 This is the C# client to use when participating in the Domain Modeling hands-on.
 
-# Getting started
 ## Starting your server
 Start the application:
 `dotnet watch run --project Recycle.WebAPI/Recycle.WebAPI.csproj` or run it from your IDE
@@ -20,3 +19,10 @@ Go to https://domainmodelling.dev and start a session.
 Add the url you got from ngrok as a client url when asked, and validate the connection.
 
 You are now ready to start. Follow the instructions for the exercises.
+
+## Getting to green
+Once you get to your first failing scenario (No fractions delivered), change [HandlingController.cs](Recycle.WebAPI/Controllers/HandlingController.cs) to return `0` instead of `1`:
+
+``` csharp
+const int amount = 1;
+```
