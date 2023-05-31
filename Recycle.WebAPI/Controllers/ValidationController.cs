@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Recycle.WebAPI.Controllers;
 
-[Route("/validate")]
-public class ValidationController
+[Route("/")]
+public class ValidationController : ControllerBase
 {
     private readonly ILogger<ValidationController> logger;
 
@@ -13,9 +13,19 @@ public class ValidationController
     }
 
     [HttpGet]
+    public IActionResult Home()
+    {
+        return Content(
+            "{ " +
+            "\"message\":" +
+            "\"please enter a public URL to this site on https://domainmodelling.dev, as specified in the readme\"" +
+            "}"
+        );
+    }
+
+    [HttpGet("/validate")]
     public ActionResult Index()
     {
-        logger.Log(LogLevel.Information, "/validate succeeded");
         return new OkResult();
     }
 }
